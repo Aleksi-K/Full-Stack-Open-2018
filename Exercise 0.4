@@ -1,0 +1,52 @@
+#
+# Sekvenssikaavio, joka on luotu osoitteessa https://www.websequencediagrams.com/
+#
+
+kayttaja->selain:
+note left of selain
+Kayttaja kirjottaa lomakekenttään 
+muistiinpanon ja klikkaa talleta painiketta
+
+end note
+selain->palvelin: POST https://fullstack--exampleapp.herokuapp.com/new_note
+note left of palvelin
+  Lähetetään uusi muistiinpano palvelimelle
+  note: Lähetetty teksti
+ Palvelin käsittelee lähetetyn tekstin
+end note
+palvelin->selain: status 302, lähetys onnistui, ladattava sivu kerrotaan
+
+
+selain->palvelin: GET https://fullstack-exampleapp.herokuapp.com/notes
+note left of palvelin
+  Haetaan html-tiedosto uudelleen
+  Se kertoo että tarvitaan 
+  tyylitiedosto "main.css" sekä
+  JavaScript tiedosto "main.js".
+  Lisäksi tiedostossa on tarvittava lomake-kenttä 
+end note
+palvelin->selain: status 200, html tiedosto
+
+selain->palvelin: GET https://fullstack-exampleapp.herokuapp.com/main.css
+palvelin->selain: status 200, tyylitiedosto
+
+selain->palvelin: GET https://fullstack-exampleapp.herokuapp.com/main.js
+palvelin->selain: status 200, JavaScript-tiedosto
+note left of palvelin
+  Haettu JavaScript-tiedosto pyytää hakemaan 
+  muistiinpanot data.json-tiedostosta sekä
+  sisältää tarvittavan koodin muistiinpanojen
+  näyttämiseen
+end note
+
+selain->palvelin: GET https://fullstack-exampleapp.herokuapp.com/data.json
+palvelin->selain: status 200, Muistiinpanot sisältävä tiedosto
+
+
+
+note left of selain
+ Selain näyttää palvelimen palauttaman HTML:n
+ jonka muotoilu tulee haetulta tyylitiedostolta,
+ sisältö haetuista muistiinpanoista sekä JavaScript-
+ tiedostosta, joka hallitsee näyttämisen ja toiminnallisuuden
+end note
