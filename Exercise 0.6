@@ -1,0 +1,26 @@
+
+kayttaja->selain:
+note left of selain
+Kayttaja kirjottaa lomakekenttään 
+muistiinpanon ja klikkaa talleta painiketta
+
+end note
+selain->palvelin: POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+note left of palvelin
+  Lähetetään uusi muistiinpano palvelimelle
+  note: Lähetetty teksti
+ Palvelin käsittelee lähetetyn tekstin
+end note
+palvelin->selain: status 201, palautetaan tieto, että lähetys onnistui
+note left of palvelin
+  Spa-versiossa oli estetty sivuston uudelleen lataus.
+  Spa.js-tiedostossa on määritelty, että lisätty muistiinpano lisätään
+  näytettävän luettelon joukkoon eikä ladata palvelimelta uudelleen 
+  muistiinpanoja tai muitakaan tiedostoja
+end note
+
+
+note left of selain
+ Selain näyttää sivua edelleen samoin kuin ennen lisäystä sillä
+ erotuksella että lisätty muistiinpano on nyt lisätty luetteloon.
+end note
